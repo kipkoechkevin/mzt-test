@@ -62,7 +62,7 @@ class CandidateController extends Controller
         ];
 
         if ($candidate->status !== 'contacted'){
-           return abort(403,'Please contact candidate before hire');
+            abort(403,'Please contact candidate before hire');
         }
 
         Mail::to($mailData['email'])->send(new HireCandidate($mailData));

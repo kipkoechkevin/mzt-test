@@ -23,9 +23,10 @@
           </button>
           <button
               @click="hireCandidate(candidate.id)"
-              class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 hover:bg-teal-100 rounded shadow">
-             <span v-if="candidate.status !== 'hired'"> Hire</span>
-             <span v-else> Hired</span>
+              :class="candidate.status === 'hired' ? 'bg-teal-200' : 'bg-white'"
+              class="hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 hover:bg-teal-100 rounded shadow">
+            <span v-if="candidate.status !== 'hired'"> Hire</span>
+            <span v-else> Hired</span>
           </button>
         </div>
         {{ output }}
@@ -47,8 +48,8 @@ export default {
       axios.post(`/candidates-contact/${id}`)
           .then(function (response) {
             console.log(response.data)
-            flash('Candidate Contacted', 'success');
-            location.reload();
+            flash('Candidate Contacted', 'success')
+            window.location.reload();
           })
           .catch(function (error) {
             console.log(error)
@@ -58,11 +59,13 @@ export default {
       axios.post(`/candidates-hire/${id}`)
           .then(function (response) {
             console.log(response.data)
-            flash('Whoop Whoop !! Candidate Hired', 'success');
+            flash('Whoop Whoop !! Candidate Hired', 'success')
+            window.location.reload();
           })
           .catch(function (error) {
             console.log(error)
           });
+
     }
   }
 }

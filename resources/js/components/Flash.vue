@@ -30,7 +30,7 @@ export default {
 
       setTimeout(() => {
         this.hide()
-      },5000)
+      },7000)
     },
     hide() {
       this.show = false
