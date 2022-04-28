@@ -1,14 +1,14 @@
 @component('mail::message')
-    # {{$mailData['title']}}
+# {{$mailData['title']}}
 
-    Hello {{$mailData['name']}}
+Hello {{$mailData['name']}}
 
-    {{$mailData['message']}}
+{{$mailData['message']}}
 
-    @component('mail::button', ['url' => $mailData['url']])
-        Start Now
-    @endcomponent
+@component('mail::button', ['url' => $mailData['url']])
+Start Now
+@endcomponent
 
-    Thanks,<br>
-    {{ config('app.name') }}
+Thanks,<br>
+{{ config('app.name') }}
 @endcomponent

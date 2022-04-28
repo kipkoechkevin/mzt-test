@@ -19,7 +19,6 @@ class CandidateController extends Controller
 
     public function contact($id)
     {
-        // @todo
         //get the candidate data
         $candidate = Candidate::find($id);
 
@@ -33,7 +32,7 @@ class CandidateController extends Controller
             'message' => 'We are contacting you for the available vacant position in our organisation',
         ];
 
-        //Send the mail
+        //Send a initial contact mail
         Mail::to($mailData['email'])->send(new ContactCandidate($mailData));
 
         //Deduct 5 coins from the company
@@ -52,23 +51,28 @@ class CandidateController extends Controller
        $company = Company::find(1);
        $candidate = Candidate::find($id);
 
+       //Get the mail data
         $mailData = [
             'name' => $candidate->name,
             'email' => $candidate->email,
             'subject' => 'Welcome Aboard - MZT',
             'url' => 'https://www.myzenteam.com/',
             'title' => 'Welcome Aboard',
-            'message' => 'We are happy to inform you ....',
+            'message' => 'We are happy to inform you',
         ];
 
+        //Check if candidate has been contacted before hiring
         if ($candidate->status !== 'contacted'){
             abort(403,'Please contact candidate before hire');
         }
 
+        //Send mail to hire a candidate
         Mail::to($mailData['email'])->send(new HireCandidate($mailData));
 
+        //Refund the 5 wallet coins
         $company->wallet()->increment('coins',5);
 
+        //Update candidate status to hired
         $candidate->status = 'hired';
         $candidate->save();
 

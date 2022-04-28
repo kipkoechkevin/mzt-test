@@ -23,7 +23,7 @@
           </button>
           <button
               @click="hireCandidate(candidate.id)"
-              :class="candidate.status === 'hired' ? 'bg-teal-200' : 'bg-white'"
+              :class="candidate.status === 'hired' ? 'bg-teal-200 disabled:opacity-25' : 'bg-white'"
               class="hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 hover:bg-teal-100 rounded shadow">
             <span v-if="candidate.status !== 'hired'"> Hire</span>
             <span v-else> Hired</span>
